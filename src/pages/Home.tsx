@@ -1,23 +1,38 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React from 'react';
+import { IonContent, IonPage, IonImg } from '@ionic/react';
+import React, { useState } from 'react';
+import Navi from '../components/Navigation';
+import Footer from '../components/Footer';
+import Spotlight from '../components/Spotlight';
 
-const Home: React.FC = () => {
+import Top from '../images/top.png';
+// simport CTA from '../images/cta.png';
+import fire from '../fire';
+
+const Home = () => {
+  // Spotlight Information
+ // const [ topImg, setTopImg ] = useState('');
+ // const [ bottomImg, setBottomImg ] = useState('');
+  const [ spotlight, setSpotlight ] = useState('');
+
+  var db = fire.firestore();
+  db.collection("website").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      if(doc.id === 'eXmRoAtjYS4VpvKdQUop') {
+      //  setTopImg(doc.data().top_img);
+      //  setBottomImg(doc.data().bottom_img);
+        setSpotlight(doc.data().spotlight);
+      }
+    });
+  });
+  
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Ionic Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        The world is your oyster.
-        <p>
-          If you get lost, the{' '}
-          <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/">
-            docs
-          </a>{' '}
-          will be your guide.
-        </p>
+      <Navi />
+      <IonContent>
+        <IonImg src={Top} />
+        <Spotlight dog={spotlight}/>
+        
+        <Footer />
       </IonContent>
     </IonPage>
   );
