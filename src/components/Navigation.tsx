@@ -17,7 +17,7 @@ const Navigation: React.FC = () => {
                     <IonRouterLink href="/adopt">Adopt</IonRouterLink>
                 </IonCol>
                 <IonCol>
-                    <a href="https://www.gofundme.com/f/b54npk-save-the-puppies?utm_source=facebook&utm_medium=social&utm_campaign=p_cp+share-sheet" target="_blank" rel="noopener noreferrer">Donate</a>
+                    <a href="paypal.me/dustypaws" target="_blank" rel="noopener noreferrer">Donate</a>
                 </IonCol>
                 <IonCol>
                     <IonRouterLink href="/about">About</IonRouterLink>
