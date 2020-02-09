@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonGrid, IonRow, IonCol, useIonViewDidEnter, IonDatetime, IonModal, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonDatetime, IonModal, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from '@ionic/react';
 import React, { useState } from 'react';
 import Navi from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -20,28 +20,26 @@ const Dogs = () => {
   });
   const [ doggies, setDogs ] = useState([]);
 
-  useIonViewDidEnter(() => {
-    if (doggies.length === 0) {
-      const db = fire.firestore();
-      var dogs = [];
-      db.collection("dogs").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          dogs.push({
-            id: doc.id,
-            name: doc.data().name, 
-            age: doc.data().age || '',
-            breed: doc.data().breed || '',
-            arrival: doc.data().arrival,
-            description: doc.data().description || '',
-          });
-          
+  if (doggies.length === 0) {
+    const db = fire.firestore();
+    var dogs = [];
+    db.collection("dogs").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        dogs.push({
+          id: doc.id,
+          name: doc.data().name, 
+          age: doc.data().age || '',
+          breed: doc.data().breed || '',
+          arrival: doc.data().arrival,
+          description: doc.data().description || '',
         });
-        return dogs;
-      }).then((dogs) => {
-        setDogs(dogs);
+        
       });
-    }
-  })
+      return dogs;
+    }).then((dogs) => {
+      setDogs(dogs);
+    });
+  }
 
   function displayProfile(data) {
     setShowModal(!showModal);

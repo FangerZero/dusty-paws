@@ -4,6 +4,7 @@ Website for Dusty Paws Rescue, it's currently a work in progress and still has q
 # Start up
 1. npm install -g @ionic/cli
 1. npm install
+1. Run `ionic serve` to start local server
 
 # FireBase
 1. install firebase `npm install -g firebase-tools`

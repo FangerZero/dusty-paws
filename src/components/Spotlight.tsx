@@ -21,19 +21,22 @@ const Spotlight = (props: any) => {
   const [ arrival, setArrival ] = useState('');
   const [ description, setDescription ] = useState('');
 
-  var db = fire.firestore();
-  db.collection("dogs").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      if(doc.id === props.dog) {
-        setId(doc.id);
-        setName(doc.data().name);
-        setAge(doc.data().age);
-        setBreed(doc.data().breed);
-        setArrival(doc.data().arrival);
-        setDescription(doc.data().description);
-      }
+  
+  if (id === '') {
+    var db = fire.firestore();
+    db.collection("dogs").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if(doc.id === props.dog) {
+          setId(doc.id);
+          setName(doc.data().name);
+          setAge(doc.data().age);
+          setBreed(doc.data().breed);
+          setArrival(doc.data().arrival);
+          setDescription(doc.data().description);
+        }
+      });
     });
-  });
+  }
 
   return (
     <IonGrid>
