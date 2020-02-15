@@ -20,6 +20,9 @@ const Dogs = () => {
   });
   const [ doggies, setDogs ] = useState([]);
 
+  ///////////////////////////////////////////////////////
+  // Request Issue is when you click and open up the individual dogsss
+
   if (doggies.length === 0) {
     const db = fire.firestore();
     var dogs = [];
