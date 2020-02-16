@@ -2,6 +2,7 @@ import { IonContent, IonPage, IonGrid, IonRow, IonCol, useIonViewDidEnter, IonDa
 import React, { useState } from 'react';
 
 import fire from '../../../fire';
+import { Redirect } from 'react-router-dom';
 
 const AdminDogs = () => {
   // Dog Info
@@ -23,6 +24,7 @@ const AdminDogs = () => {
   const [ editWord, setEditWord ] = useState('Edit');
   const [ newDog, setNewDog ] = useState('');
   const [ showAlert1, setShowAlert1] = useState(false);
+  const [ redirect, setRedirect ] = useState(false);
 
   useIonViewDidEnter(() => {
     if (doggies.length === 0) {
@@ -168,8 +170,24 @@ const AdminDogs = () => {
     console.log(displayImgs);
   }
 
+  var auth = fire.auth();
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      console.log('User logged in');
+    } else {
+      setRedirect(true);
+    }
+  })
+  
+  function renderRedirect() {
+    if (redirect) {
+      return <Redirect to='/admin/login' />
+    }
+  }
+
   return (
     <IonPage>
+      {renderRedirect()}
       <IonContent className="ion-padding">
         <IonGrid>
           <IonRow>

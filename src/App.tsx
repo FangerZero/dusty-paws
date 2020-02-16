@@ -8,6 +8,7 @@ import Dogs from './pages/Dogs';
 import Adopt from './pages/Adopt';
 import Donate from './pages/Donate';
 import Join from './pages/Join';
+import Affiliates from './pages/Affiliates';
 import AdminLogin from './pages/admin/Login';
 import AdminHome from './pages/admin/Home';
 
@@ -49,6 +50,7 @@ const App: React.FC = () => (
         <Route path="/dogs" component={Dogs} exact={true} />
         <Route path="/adopt" component={Adopt} exact={true} />
         <Route path="/donate" component={Donate} exact={true} />
+        <Route path="/affiliates" component={Affiliates} exact={true} />
         <Route path="/join" component={Join} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />

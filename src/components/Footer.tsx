@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
                     <IonRouterLink href="/dogs"> Dogs</IonRouterLink> |
                     <IonRouterLink href="/adopt"> Adopt</IonRouterLink> |
                     <a href="https://www.gofundme.com/f/b54npk-save-the-puppies?utm_source=facebook&utm_medium=social&utm_campaign=p_cp+share-sheet" target="_blank" rel="noopener noreferrer"> Donate</a> |
-                    <IonRouterLink href="/join"> Join</IonRouterLink> |
+                    <IonRouterLink href="/affiliates"> Affiliates</IonRouterLink> |
                     <a href="https://www.facebook.com/dustypawsasafehavenforgreatpyrenees/"  target="_blank" rel="noopener noreferrer" > FaceBook</a>
                 </IonCol>
             </IonRow>
@@ -24,3 +24,5 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+
+// <IonRouterLink href="/join"> Join</IonRouterLink> |
