@@ -1,14 +1,33 @@
 import { IonTabs, IonTabButton, IonRouterOutlet, IonIcon, IonTabBar, IonLabel } from '@ionic/react';
-import { clipboard, paw } from 'ionicons/icons';
-import React from 'react';
+import { clipboard, paw, logOut } from 'ionicons/icons';
+import React, { useState } from 'react';
 
 import Dogs from './tabs/Dogs';
 import Applications from './tabs/Applications';
+import fire from '../../fire';
+// import { Redirect } from 'react-router-dom';
 import { Route, Redirect } from 'react-router';
 
 const AdminHome = () => {  
+  const [ redirect, setRedirect ] = useState(false);
+
+  var auth = fire.auth();
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      setRedirect(false);
+    } else {
+      setRedirect(true);
+    }
+  })
+  
+  function renderRedirect() {
+    if (redirect) {
+      return <Redirect to='/admin/login' />
+    }
+  }
+
   return (<IonTabs>
-    meow
+      {renderRedirect()}
     <IonRouterOutlet>
       <Redirect exact path="/admin/home" to="/admin/dogs" />
       {/* 
@@ -19,13 +38,17 @@ const AdminHome = () => {
       <Route path="/admin/applications" render={() => <Applications />} exact={true} />
     </IonRouterOutlet>
     <IonTabBar slot="top">
-      <IonTabButton tab="schedule" href="/admin/dogs">
+      <IonTabButton tab="dogs" href="/admin/dogs">
         <IonIcon icon={paw} />
         <IonLabel>Dogs</IonLabel>
       </IonTabButton>
-      <IonTabButton tab="speakers" href="/admin/applications">
+      <IonTabButton tab="applications" href="/admin/applications">
         <IonIcon icon={clipboard} />
         <IonLabel>Applications</IonLabel>
+      </IonTabButton>
+      <IonTabButton tab="logout" href="/admin/login">
+        <IonIcon icon={logOut} />
+        <IonLabel>Logout</IonLabel>
       </IonTabButton>
     </IonTabBar>
   </IonTabs>
@@ -33,14 +56,3 @@ const AdminHome = () => {
 };
 
 export default AdminHome;
-
-/*
-<IonGrid>
-          <IonRow>
-            <IonCol sizeXs="12" offsetMd="2" sizeMd="8">
-              <IonList>
-              </IonList>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-        */

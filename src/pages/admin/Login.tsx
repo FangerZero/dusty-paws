@@ -20,8 +20,7 @@ const AdminLogin = () => {
 
  auth.onAuthStateChanged(user => {
    if (user) {
-     console.log('logged in');
-     // auth.signOut();
+    // auth.signOut();
    } else {
      setRedirect(false);
    }
