@@ -4,14 +4,15 @@ import React, { useState } from 'react';
 
 import Dogs from './tabs/Dogs';
 import Applications from './tabs/Applications';
+// import Login from './Login';
 import fire from '../../fire';
-// import { Redirect } from 'react-router-dom';
-import { Route, Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
+import { Route } from 'react-router';
 
 const AdminHome = () => {  
+  var auth = fire.auth();
   const [ redirect, setRedirect ] = useState(false);
 
-  var auth = fire.auth();
   auth.onAuthStateChanged(user => {
     if (user) {
       setRedirect(false);
@@ -19,40 +20,43 @@ const AdminHome = () => {
       setRedirect(true);
     }
   })
-  
-  function renderRedirect() {
-    if (redirect) {
-      return <Redirect to='/admin/login' />
-    }
+
+  function loginRender() {
+    return <Redirect to="/admin/login" />
   }
 
-  return (<IonTabs>
-      {renderRedirect()}
-    <IonRouterOutlet>
-      <Redirect exact path="/admin/home" to="/admin/dogs" />
-      {/* 
-        Using the render method prop cuts down the number of renders your components will have due to route changes.
-        Use the component prop when your component depends on the RouterComponentProps passed in automatically.        
-      */}
-      <Route path="/admin/dogs" render={() => <Dogs />} exact={true} />
-      <Route path="/admin/applications" render={() => <Applications />} exact={true} />
-    </IonRouterOutlet>
-    <IonTabBar slot="top">
-      <IonTabButton tab="dogs" href="/admin/dogs">
-        <IonIcon icon={paw} />
-        <IonLabel>Dogs</IonLabel>
-      </IonTabButton>
-      <IonTabButton tab="applications" href="/admin/applications">
-        <IonIcon icon={clipboard} />
-        <IonLabel>Applications</IonLabel>
-      </IonTabButton>
-      <IonTabButton tab="logout" href="/admin/login">
-        <IonIcon icon={logOut} />
-        <IonLabel>Logout</IonLabel>
-      </IonTabButton>
-    </IonTabBar>
-  </IonTabs>
-  );
+  function logoutRender() {
+    auth.signOut();
+    return <Redirect to="/admin/login" />
+  }
+
+  function pageRender() {
+    return (
+      <IonTabs>
+        <IonRouterOutlet>
+          <Route path="/admin/dogs" render={() => <Dogs />} exact={true} />
+          <Route path="/admin/applications" render={() => <Applications />} exact={true} />
+          <Route path="/admin/logout" render={() => logoutRender()} exact={true} />
+        </IonRouterOutlet>
+        <IonTabBar slot="top">
+          <IonTabButton tab="dogs" href="/admin/dogs">
+            <IonIcon icon={paw} />
+            <IonLabel>Dogs</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="applications" href="/admin/applications">
+            <IonIcon icon={clipboard} />
+            <IonLabel>Applications</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="logout" href="/admin/logout">
+            <IonIcon icon={logOut} />
+            <IonLabel>Logout</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
+    );
+  }
+
+  return redirect ? loginRender() : pageRender();
 };
 
 export default AdminHome;

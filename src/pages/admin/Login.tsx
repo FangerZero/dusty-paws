@@ -19,22 +19,18 @@ const AdminLogin = () => {
   }
 
  auth.onAuthStateChanged(user => {
-   if (user) {
-    // auth.signOut();
-   } else {
+   if (!user) {
      setRedirect(false);
    }
  })
 
  function renderRedirect() {
-    if (redirect) {
-      return <Redirect to='/admin/home' />
-    }
+    return <Redirect to='/admin/home' />
   }
-  
-  return (
+
+  function renderPage() {
+    return (
     <IonPage>
-      {renderRedirect()}
       <IonContent>
         <IonGrid>
           <IonRow>
@@ -49,7 +45,10 @@ const AdminLogin = () => {
         </IonGrid>
       </IonContent>
     </IonPage>
-  );
+    );
+  }
+  
+  return redirect ? renderRedirect() : renderPage();
 };
 
 export default AdminLogin;
