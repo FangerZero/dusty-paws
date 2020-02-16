@@ -39,7 +39,7 @@ const Dogs = () => {
         
       });
       return dogs;
-    }).then((dogs) => {
+    }).then(dogs => {
       setDogs(dogs);
     });
   }
@@ -91,22 +91,22 @@ const Dogs = () => {
         </IonGrid>
         <Footer />
         <IonModal isOpen={showModal} backdropDismiss={false}>
-          <IonList>
-            <IonItem lines="none">
-              <h3>{displayData.name}</h3>
-              <IonButton slot="end" onClick={() => setShowModal(false)}>Close</IonButton>
-            </IonItem>
-            <IonItem lines="none">
-              <DogImg />
-            </IonItem>
-            <IonItem lines="none">
-              Arrived:<IonDatetime displayFormat="MMMM DD, YYYY" disabled value={displayData.arrival} />
-            </IonItem>
-            <IonItem lines="none">
-              {displayData.description}
-            </IonItem>
-            <IonButton expand="block" href={`/adopt?${displayData.id}`}>Adopt</IonButton>
-          </IonList>
+            <IonList>
+              <IonItem lines="none">
+                <h3>{displayData.name}</h3>
+                <IonButton slot="end" onClick={() => setShowModal(false)}>Close</IonButton>
+              </IonItem>
+              <IonItem lines="none">
+                <DogImg id={displayData.id} />
+              </IonItem>
+              <IonItem lines="none">
+                Arrived:<IonDatetime displayFormat="MMMM DD, YYYY" disabled value={displayData.arrival} />
+              </IonItem>
+              <IonItem lines="none">
+                {displayData.description}
+              </IonItem>
+              <IonButton expand="block" href={`/adopt?${displayData.id}`}>Adopt</IonButton>
+            </IonList>
         </IonModal>
       </IonContent>
     </IonPage>

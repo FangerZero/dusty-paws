@@ -18,6 +18,7 @@ const AdminDogs = () => {
     description: "",
   });
   const [ displayImgs, setDisplayImgs ] = useState([]);
+  // const [ profileImg, setProfileImg ] = useState([]);
   const [ doggies, setDogs ] = useState([]);
   const [ edit, setEdit ] = useState(false);
   const [ editWord, setEditWord ] = useState('Edit');
@@ -155,7 +156,6 @@ const AdminDogs = () => {
     test.list().then(results => {
       let imgs = [];
       results.items.map(item => {
-        
         return item.getDownloadURL().then(url => {
           imgs.push(url);
         }).catch(err => { console.log(err) });
@@ -166,6 +166,8 @@ const AdminDogs = () => {
     });
 
     console.log(displayImgs);
+    //setProfileImg();
+    //console.log(profileImg);
   }
 
   return (
