@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 
 import Dogs from './tabs/Dogs';
 import Applications from './tabs/Applications';
-// import Login from './Login';
 import fire from '../../fire';
 import { Redirect } from 'react-router-dom';
 import { Route } from 'react-router';

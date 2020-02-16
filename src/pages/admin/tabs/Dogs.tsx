@@ -220,7 +220,7 @@ const AdminDogs = () => {
             </IonItem>
             <IonItem lines="none">
               <IonLabel position="stacked">Date Arrived</IonLabel>
-              <IonDatetime displayFormat="MMMM DD, YYYY" placeholder="Date Arrived" disabled={!edit} value={displayData.arrival} />
+              <IonDatetime displayFormat="MMMM DD, YYYY" placeholder="Date Arrived" disabled={!edit} value={displayData.arrival} onBlur={e => saveChange(e, 'arrival', displayData.id)}/>
             </IonItem>
             <IonItem lines="none">
               <IonLabel position="stacked">Age</IonLabel>
