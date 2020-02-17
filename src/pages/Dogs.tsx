@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonDatetime, IonModal, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonModal, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from '@ionic/react';
 import React, { useState } from 'react';
 import Navi from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -17,6 +17,8 @@ const Dogs = () => {
     breed: "",
     arrival: "",
     description: "",
+    fee: "",
+    adopted: false,
   });
   const [ doggies, setDogs ] = useState([]);
 
@@ -35,6 +37,8 @@ const Dogs = () => {
           breed: doc.data().breed || '',
           arrival: doc.data().arrival,
           description: doc.data().description || '',
+          fee: doc.data().fee || '',
+          adopted: doc.data().adopted,
         });
         
       });
@@ -67,14 +71,18 @@ const Dogs = () => {
                             <ProfileImg id={el.id}/>
                             <IonCardHeader>
                               <IonCardSubtitle>{el.age} yrs - {el.breed}</IonCardSubtitle>
-                              <IonCardTitle>{el.name}</IonCardTitle>
+                              <IonCardTitle>{el.name}{el.adopted && <h3>&nbsp;Has been Adoppted!!!</h3>}</IonCardTitle>
                             </IonCardHeader>
-                            <IonCardContent>
-                              {el.description.slice(0,130)}...
-                            </IonCardContent>
-                            <IonCardContent>
-                            <IonButton expand="block" href={`/adopt?${el.id}`}>Adopt</IonButton>
-                            </IonCardContent>
+                            {!el.adopted && 
+                              <IonCardContent>
+                                {el.description.slice(0,130)}...
+                              </IonCardContent>
+                            }
+                            {!el.adopted &&
+                              <IonCardContent>
+                                <IonButton expand="block" href={`/adopt?${el.id}`}>Adopt</IonButton>
+                              </IonCardContent>
+                            }
                           </IonCard>
                         </IonCol>
                       );
@@ -93,24 +101,32 @@ const Dogs = () => {
         <IonModal isOpen={showModal} backdropDismiss={false}>
             <IonList>
               <IonItem lines="none">
-                <h3>{displayData.name}</h3>
+                <h3>{displayData.name} </h3>
+                {displayData.adopted && <h3>&nbsp;Has been Adoppted!!!</h3>}
                 <IonButton slot="end" onClick={() => setShowModal(false)}>Close</IonButton>
               </IonItem>
               <IonItem lines="none">
                 <DogImg id={displayData.id} />
               </IonItem>
               <IonItem lines="none">
-                Arrived:<IonDatetime displayFormat="MMMM DD, YYYY" disabled value={displayData.arrival} />
+                Arrived: {displayData.arrival}
+              </IonItem>
+              <IonItem lines="none">
+                Fee: ${displayData.fee}
               </IonItem>
               <IonItem lines="none">
                 {displayData.description}
               </IonItem>
-              <IonButton expand="block" href={`/adopt?${displayData.id}`}>Adopt</IonButton>
+              {!displayData.adopted && 
+                <IonButton expand="block" href={`/adopt?${displayData.id}`}>Adopt</IonButton>
+              }
             </IonList>
         </IonModal>
       </IonContent>
     </IonPage>
   );
 }
+
+/*<IonDatetime displayFormat="MMMM DD, YYYY" value={displayData.arrival} />*/
 
 export default Dogs;
