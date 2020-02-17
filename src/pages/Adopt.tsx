@@ -1,7 +1,8 @@
-import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonList, IonItem, IonInput, IonButton, IonSelectOption, IonSelect, useIonViewDidEnter, IonModal, IonRouterLink } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonList, IonItem, IonInput, IonButton, IonSelectOption, IonSelect, useIonViewDidEnter, IonModal, IonRouterLink, IonCard, IonCardHeader, IonCardContent, IonCardTitle } from '@ionic/react';
 import React, { useState } from 'react';
 import Navi from '../components/Navigation';
 import Footer from '../components/Footer';
+import BreedInfo from '../components/BreedInfo';
 
 import fire from '../fire';
 
@@ -10,6 +11,8 @@ const Adopt = (props: any) => {
   const [ form, setForm] = useState({});
   const [ showModal, setShowModal] = useState(false);
   const [ validModal, setValidModal] = useState(false);
+  // eslint-disable-next-line
+  const [ infoModal, setInfoModal ] = useState(false);
   const [ adopting, setAdopting ] = useState("");
   const [ invalidList, setInvalidList ] = useState("");
   const db = fire.firestore();
@@ -111,6 +114,18 @@ const Adopt = (props: any) => {
           <IonRow>
             <IonCol offsetMd="2">
               <IonList>
+                <IonItem lines="none">
+                  <IonCard>
+                    <IonCardHeader>
+                      <IonCardTitle>So you want to adopt a Great Pyrenees?</IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardContent>
+                      If you've already researched the breed, go ahead and fill out the Application below, however if you haven't you might want to read this quick article.
+                      <br />
+                      <IonButton onClick={() => setInfoModal(true)}>Learn More</IonButton>
+                    </IonCardContent>
+                  </IonCard>
+                </IonItem>
                 <IonItem>
                   Dusty Paws has a $15.00 non-refundable application fee.
                 </IonItem>
@@ -156,6 +171,9 @@ const Adopt = (props: any) => {
             <IonCol size="2" />
           </IonRow>
         </IonGrid>
+        <IonModal isOpen={infoModal}>
+          <BreedInfo />
+        </IonModal>
         <IonModal isOpen={showModal} backdropDismiss={false}>
           <IonGrid>
             <IonRow>
