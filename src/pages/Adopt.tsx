@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonList, IonItem, IonInput, IonButton, IonSelectOption, IonSelect, useIonViewDidEnter, IonModal, IonRouterLink, IonCard, IonCardHeader, IonCardContent, IonCardTitle } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonList, IonItem, IonInput, IonButton, IonSelectOption, IonSelect, useIonViewDidEnter, IonModal, IonRouterLink, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonItemDivider, IonLabel } from '@ionic/react';
 import React, { useState } from 'react';
 import Navi from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -48,9 +48,9 @@ const Adopt = (props: any) => {
         dog_1: props.location.search.slice(1) || "",
         dog_2: "",
         dog_3: "",
-        adults: [],
-        children: [],
-        pets: [],
+        adults: "",
+        children: "",
+        pets: "",
         home: "",
         homeType: "",
         landlord: "",
@@ -67,7 +67,7 @@ const Adopt = (props: any) => {
         dogAloneLocal: "",
         dogHumanLocal: "",
         dogSleepLocal: "",
-        unprepared: [],
+        unprepared: "",
         dogPreference: "",
         dogSize: "",
         dogBreed: "",
@@ -146,29 +146,53 @@ const Adopt = (props: any) => {
                 <IonItem>
                   Dusty Paws has a $15.00 non-refundable application fee.
                 </IonItem>
-                <IonItem>
+                <IonItemDivider>
+                  <IonLabel>Contact Information</IonLabel>
+                </IonItemDivider>
+                <IonItem lines="none">
                   <IonInput type="text" placeholder="First Name" name="firstName" required onIonBlur={e => updateForm(e, 'firstName') }></IonInput>
                 </IonItem>
-                <IonItem>
+                <IonItem lines="none">
                   <IonInput type="text" placeholder="Last Name" name="lastName" required onIonBlur={e => updateForm(e, 'lastName') }></IonInput>
                 </IonItem>
-                <IonItem>
+                <IonItem lines="none">
                   <IonInput type="tel" placeholder="Phone #" name="phone" required onIonBlur={e => updateForm(e, 'phone') }></IonInput>
                 </IonItem>
-                <IonItem>
+                <IonItem lines="none">
                   <IonInput type="email" placeholder="Email" name="email" required onIonBlur={e => updateForm(e, 'email') }></IonInput>
                 </IonItem>
-                <IonItem>
+                <IonItem lines="none">
                   <IonInput type="text" placeholder="Address" name="address_1" onIonBlur={e => updateForm(e, 'address_1') }></IonInput>
                 </IonItem>
-                <IonItem>
+                <IonItem lines="none">
                   <IonInput type="text" placeholder="City" name="city" onIonBlur={e => updateForm(e, 'city') }></IonInput>
                 </IonItem>
-                <IonItem>
+                <IonItem lines="none">
                   <IonInput type="text" max="2" placeholder="State" name="state" onIonBlur={e => updateForm(e, 'state') }></IonInput>
                 </IonItem>
                 <IonItem>
                   <IonInput type="text" max="5" placeholder="Zip" name="zip" onIonBlur={e => updateForm(e, 'zip') }></IonInput>
+                </IonItem>
+                <IonItemDivider>
+                  <IonLabel>Home Information</IonLabel>
+                </IonItemDivider>
+                <IonItem>
+                  House, Apartment, Condo, etc.
+                </IonItem>
+                <IonItem>
+                  Do you rent? 
+                </IonItem>
+                <IonItem>
+                  If renting Landlord Name and Phone
+                </IonItem>
+                <IonItem>
+                  Yard Type
+                </IonItem>
+                <IonItem>
+                  Fence Yes or no?
+                </IonItem>
+                <IonItem>
+                  If Fence, 3 or 6 foot? & What Material
                 </IonItem>
                 <IonItem lines="none">
                   Select at least one dog you are interested in
