@@ -32,7 +32,7 @@ const AdminDogs = () => {
   })
 
   function imgSelectedHandler(event) {
-    const megabyte = 1048576;
+    const megabyte = 5048576;
     const files = event.target.files;
 
     if (files.length <= 5) {
