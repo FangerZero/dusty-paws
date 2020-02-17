@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonGrid, IonRow, IonCol, useIonViewDidEnter, IonDatetime, IonModal, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonTextarea, IonAlert, IonLabel } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonRow, IonCol, useIonViewDidEnter, IonDatetime, IonModal, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonTextarea, IonAlert, IonLabel, IonCheckbox } from '@ionic/react';
 import React, { useState } from 'react';
 
 import fire from '../../../fire';
@@ -16,9 +16,10 @@ const AdminDogs = () => {
     breed: "",
     arrival: "",
     description: "",
+    fixed: false,
+    fee: "",
+    adopted: false,
   });
-  const [ displayImgs, setDisplayImgs ] = useState([]);
-  // const [ profileImg, setProfileImg ] = useState([]);
   const [ doggies, setDogs ] = useState([]);
   const [ edit, setEdit ] = useState(false);
   const [ editWord, setEditWord ] = useState('Edit');
@@ -69,8 +70,8 @@ const AdminDogs = () => {
           breed: doc.data().breed,
           arrival: doc.data().arrival,
           description: doc.data().description,
+          fixed: doc.data().fixed,
           fee: doc.data().fee,
-          pending: doc.data().pending,
           adopted: doc.data().adopted,
         });
       });
@@ -115,7 +116,7 @@ const AdminDogs = () => {
         docRef.set({...data}, { merge: true });
         newDogs.push(newDog);
       }
-    })    
+    })  
 
     setDisplayData(newDog);
     setDogs(newDogs);
@@ -129,6 +130,9 @@ const AdminDogs = () => {
       breed: "",
       arrival: "",
       description: "",
+      fixed: false,
+      fee: "",
+      adopted: false,
     });
   }
 
@@ -142,32 +146,6 @@ const AdminDogs = () => {
     setDogs(dogs);
     setShowModal(false);
     docRef.delete();
-  }
-
-  function getAllImages() {
-
-    //console.log('listthem', storageRef.child('dogs/RmJo5zgciFIPJ0odlD6p').list());
-    // console.log('listthem', storageRef.child('dogs/uxPbpmSD7tt2NH4uF1in').list());
-    
-    let test = storageRef.child('dogs/' + displayData.id);
-    // storageRef.put
-    console.log(test.list());
-   //  test.put();
-    test.list().then(results => {
-      let imgs = [];
-      results.items.map(item => {
-        return item.getDownloadURL().then(url => {
-          imgs.push(url);
-        }).catch(err => { console.log(err) });
-      })
-      return imgs;
-    }).then(imgs => {
-      setDisplayImgs(imgs);
-    });
-
-    console.log(displayImgs);
-    //setProfileImg();
-    //console.log(profileImg);
   }
 
   return (
@@ -221,16 +199,50 @@ const AdminDogs = () => {
               <IonButton slot="end" onClick={() => {setEdit(false); setEditWord('Edit'); setShowModal(false); resetDisplayData();}}>Close</IonButton>
             </IonItem>
             <IonItem lines="none">
-              <IonLabel position="stacked">Date Arrived</IonLabel>
-              <IonDatetime displayFormat="MMMM DD, YYYY" placeholder="Date Arrived" disabled={!edit} value={displayData.arrival} onBlur={e => saveChange(e, 'arrival', displayData.id)}/>
-            </IonItem>
-            <IonItem lines="none">
-              <IonLabel position="stacked">Age</IonLabel>
-              <IonInput name="age" placeholder="Age" value={displayData.age} disabled={!edit} onBlur={e => saveChange(e, 'age', displayData.id)}/>
+              <IonGrid>
+                <IonRow>
+                  <IonCol>  
+                    <IonItem lines="none">
+                      <IonLabel position="stacked">Age</IonLabel>
+                      <IonInput name="age" placeholder="Age" value={displayData.age} disabled={!edit} onBlur={e => saveChange(e, 'age', displayData.id)}/>
+                      </IonItem>    
+                    </IonCol>
+                  <IonCol>      
+                    <IonItem lines="none">
+                      <IonLabel position="stacked">Date Arrived</IonLabel>
+                      <IonDatetime displayFormat="MMMM DD, YYYY" placeholder="Date Arrived" disabled={!edit} value={displayData.arrival} onBlur={e => saveChange(e, 'arrival', displayData.id)}/>
+                    </IonItem>
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
             </IonItem>
             <IonItem lines="none">
               <IonLabel position="stacked">Breed</IonLabel>
               <IonInput name="breed" placeholder="Breed" value={displayData.breed} disabled={!edit} onBlur={e => saveChange(e, 'breed', displayData.id)}/>
+            </IonItem>
+            <IonItem lines="none">
+              <IonGrid>
+                <IonRow>
+                  <IonCol>      
+                    <IonItem lines="none">
+                      <IonLabel position="stacked">Fee</IonLabel>
+                      <IonInput name="fee" placeholder="Fee" value={displayData.fee} disabled={!edit} onBlur={e => saveChange(e, 'fee', displayData.id)}/>
+                    </IonItem>
+                  </IonCol>
+                  <IonCol>      
+                    <IonItem lines="none">
+                      <IonLabel position="stacked">Fixed</IonLabel>
+                      <IonCheckbox name="fixed" disabled={!edit} checked={displayData.fixed} onBlur={e => saveChange(e, 'fixed', displayData.id)}/>
+                    </IonItem>
+                  </IonCol>
+                  <IonCol>      
+                    <IonItem lines="none">
+                      <IonLabel position="stacked">Adopted</IonLabel>
+                      <IonCheckbox name="adopted" disabled={!edit} checked={displayData.adopted} onBlur={e => saveChange(e, 'adopted', displayData.id)}/>
+                    </IonItem>
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
             </IonItem>
             <IonItem>
               <IonLabel position="stacked">Description</IonLabel>
@@ -252,7 +264,6 @@ const AdminDogs = () => {
                 Picutres: 
                 <input id="img-files" type="file" name="file-a" onChange={imgSelectedHandler} />
               </IonCard>
-              <IonButton onClick={() => getAllImages()}>Click Me!</IonButton>
             </IonItem>
           </IonList>
           <IonButton expand="block" onClick={() => confirmDelete()}>Remove</IonButton>
