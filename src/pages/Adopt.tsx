@@ -48,17 +48,34 @@ const Adopt = (props: any) => {
         dog_1: props.location.search.slice(1) || "",
         dog_2: "",
         dog_3: "",
+        adults: [],
+        children: [],
+        pets: [],
+        home: "",
+        homeType: "",
+        landlord: "",
+        landlordPhone: "",
+        yardType: "",
+        fence: false,
+        fenceType: "",
+        vetName: "",
+        vetOffice: "",
+        vetPhone: "",
+        vetLocation: "",
+        dogExperience: "",
+        dogAloneTime: "",
+        dogAloneLocal: "",
+        dogHumanLocal: "",
+        dogSleepLocal: "",
+        unprepared: [],
+        dogPreference: "",
+        dogSize: "",
+        dogBreed: "",
+        dogAge: "",
+        terms: false,
       });
     });
   });
-  /*
-    accepted: false,
-    app_fee: "",
-    app_fee_trans_id: "",
-    adopt_fee: "",
-    adopt_fee_trans_id: "",
-    notes: "",
-  */
 
   function getDogOptions(dogs, input) {
     return (
