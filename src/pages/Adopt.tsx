@@ -1,8 +1,20 @@
-import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonList, IonItem, IonInput, IonButton, IonSelectOption, IonSelect, useIonViewDidEnter, IonModal, IonRouterLink, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonItemDivider, IonLabel } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonList, IonItem, IonButton, IonSelectOption, IonSelect, useIonViewDidEnter, IonCard, IonCardHeader, IonCardContent, IonCardTitle } from '@ionic/react';
 import React, { useState } from 'react';
 import Navi from '../components/Navigation';
 import Footer from '../components/Footer';
-import BreedInfo from '../components/BreedInfo';
+// Modals
+import BreedInfo from '../components/modals/BreedInfo';
+import AppComplete from '../components/modals/AppComplete';
+import AppError from '../components/modals/AppError';
+// Forms
+import ContactInfo from '../components/adopt/ContactInfo';
+import FamilyInfo from '../components/adopt/FamilyInfo';
+import HomeInfo from '../components/adopt/HomeInfo';
+import VetInfo from '../components/adopt/VetInfo';
+import DogPreference from '../components/adopt/DogPreference';
+import DogExperience from '../components/adopt/DogExperience';
+import DogSelect from '../components/adopt/DogSelect';
+import TermsOfService from '../components/adopt/TermsOfService';
 
 import fire from '../fire';
 
@@ -53,21 +65,23 @@ const Adopt = (props: any) => {
         pets: "",
         home: "",
         homeType: "",
+        rent: "",
         landlord: "",
         landlordPhone: "",
         yardType: "",
-        fence: false,
         fenceType: "",
+        fenceHeight: "",
+        fenceMaterial: "",
         vetName: "",
-        vetOffice: "",
+        vetClinic: "",
         vetPhone: "",
-        vetLocation: "",
+        vetAddress: "",
         dogExperience: "",
         dogAloneTime: "",
         dogAloneLocal: "",
         dogHumanLocal: "",
         dogSleepLocal: "",
-        unprepared: "",
+        dogUnprepared: [],
         dogPreference: "",
         dogSize: "",
         dogBreed: "",
@@ -87,6 +101,17 @@ const Adopt = (props: any) => {
         }
       </IonSelect>
     );
+  }
+
+  function getFormData(value) {
+    return form[value];
+  }
+
+  function setTermsOfService(value) {
+    var data = {}
+    data[value] = !form[value];
+    setForm({...form, ...data});
+    console.log(data);
   }
 
   function updateForm(e, value) {
@@ -146,106 +171,23 @@ const Adopt = (props: any) => {
                 <IonItem>
                   Dusty Paws has a $15.00 non-refundable application fee.
                 </IonItem>
-                <IonItemDivider>
-                  <IonLabel>Contact Information</IonLabel>
-                </IonItemDivider>
-                <IonItem lines="none">
-                  <IonInput type="text" placeholder="First Name" name="firstName" required onIonBlur={e => updateForm(e, 'firstName') }></IonInput>
-                </IonItem>
-                <IonItem lines="none">
-                  <IonInput type="text" placeholder="Last Name" name="lastName" required onIonBlur={e => updateForm(e, 'lastName') }></IonInput>
-                </IonItem>
-                <IonItem lines="none">
-                  <IonInput type="tel" placeholder="Phone #" name="phone" required onIonBlur={e => updateForm(e, 'phone') }></IonInput>
-                </IonItem>
-                <IonItem lines="none">
-                  <IonInput type="email" placeholder="Email" name="email" required onIonBlur={e => updateForm(e, 'email') }></IonInput>
-                </IonItem>
-                <IonItem lines="none">
-                  <IonInput type="text" placeholder="Address" name="address_1" onIonBlur={e => updateForm(e, 'address_1') }></IonInput>
-                </IonItem>
-                <IonItem lines="none">
-                  <IonInput type="text" placeholder="City" name="city" onIonBlur={e => updateForm(e, 'city') }></IonInput>
-                </IonItem>
-                <IonItem lines="none">
-                  <IonInput type="text" max="2" placeholder="State" name="state" onIonBlur={e => updateForm(e, 'state') }></IonInput>
-                </IonItem>
-                <IonItem>
-                  <IonInput type="text" max="5" placeholder="Zip" name="zip" onIonBlur={e => updateForm(e, 'zip') }></IonInput>
-                </IonItem>
-                <IonItemDivider>
-                  <IonLabel>Home Information</IonLabel>
-                </IonItemDivider>
-                <IonItem>
-                  House, Apartment, Condo, etc.
-                </IonItem>
-                <IonItem>
-                  Do you rent? 
-                </IonItem>
-                <IonItem>
-                  If renting Landlord Name and Phone
-                </IonItem>
-                <IonItem>
-                  Yard Type
-                </IonItem>
-                <IonItem>
-                  Fence Yes or no?
-                </IonItem>
-                <IonItem>
-                  If Fence, 3 or 6 foot? & What Material
-                </IonItem>
-                <IonItem lines="none">
-                  Select at least one dog you are interested in
-                </IonItem>
-                <IonItem lines="none">
-                    { doggies && getDogOptions(doggies, 'dog_1') }
-                </IonItem>
-                <IonItem lines="none">
-                    { doggies && getDogOptions(doggies, 'dog_2') }
-                </IonItem>
-                <IonItem>
-                    { doggies && getDogOptions(doggies, 'dog_3') }
-                </IonItem>
+                <ContactInfo updateForm={updateForm} />
+                <FamilyInfo updateForm={updateForm} />
+                <HomeInfo updateForm={updateForm} getFormData={getFormData} />
+                <VetInfo updateForm={updateForm} />
+                <DogPreference updateForm={updateForm} />
+                <DogExperience updateForm={updateForm} />
+                <DogSelect doggies={doggies} getDogOptions={getDogOptions}/>
+                <TermsOfService updateForm={updateForm} setTermsOfService={setTermsOfService}/>
               </IonList>
               <IonButton expand="block" onClick={submit}>Submit</IonButton>
             </IonCol>
             <IonCol size="2" />
           </IonRow>
         </IonGrid>
-        <IonModal isOpen={infoModal}>
-          <BreedInfo />
-        </IonModal>
-        <IonModal isOpen={showModal} backdropDismiss={false}>
-          <IonGrid>
-            <IonRow>
-              <IonCol offset="2" size="5" >
-                <p>
-                  Your Application has been received, please give 3 business days for us to get back to you.
-                </p>
-                <IonRouterLink href="/home">Done</IonRouterLink>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonModal>
-        <IonModal isOpen={validModal}>
-          <IonGrid>
-            <IonRow>
-              <IonCol offset="2" size="9" >
-                <p>
-                  Please ensure your personal information is filled out so we can contact you. 
-                </p>
-                <p>
-                  Mising Values: {invalidList}
-                </p>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol offset="5" >
-                <IonButton onClick={() => setValidModal(false)}>Close</IonButton>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonModal>
+        <BreedInfo infoModal={infoModal}/>
+        <AppComplete showModal={showModal} />
+        <AppError validModal={validModal} invalidList={invalidList} setValidModal={setValidModal} />
         <Footer />
       </IonContent>
     </IonPage>
