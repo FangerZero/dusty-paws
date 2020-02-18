@@ -111,7 +111,6 @@ const Adopt = (props: any) => {
     var data = {}
     data[value] = !form[value];
     setForm({...form, ...data});
-    console.log(data);
   }
 
   function updateForm(e, value) {
@@ -123,24 +122,19 @@ const Adopt = (props: any) => {
   function submit() {
     var isValid = true;
     var list = "";
+    var required = 'firstName,lastName,phone,email,address_1,city,state,zip';
     
-    /*
-    Object.keys(form).map(function(keyName, keyIndex) {
-      if (form[keyName] === "" && !keyName.includes("dog")) {
+    Object.keys(form).map((keyName, keyIndex) => {
+      if (!form[keyName].length && required.includes(keyName)) {
         isValid = false;
-        if(keyIndex) {
-          list+=', '+keyName;
-        } else {
-          list = keyName;
-        }
+        list += keyIndex ? `, ${keyName}` : keyName;
       }
-      return !keyName.includes("dog") ? keyName : null;
     });
 
     if (list.length !== 0) {
       setValidModal(true);
       setInvalidList(list);
-    }*/
+    }
 
     if (isValid) {
       setShowModal(true);
