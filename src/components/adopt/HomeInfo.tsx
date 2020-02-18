@@ -35,13 +35,13 @@ const HomeInfo = (props: any) => {
             { show && props.getFormData('rent') === 'yes' &&
                 <IonItem lines="none">
                     <IonLabel position="floating">Landlord Name</IonLabel>
-                    <IonInput type="text" name="landlordName" required onIonBlur={e => props.updateForm(e, 'landlordName') }></IonInput>
+                    <IonInput type="text" name="landlordName" onIonBlur={e => props.updateForm(e, 'landlordName') }></IonInput>
                 </IonItem>
             }
             { show && props.getFormData('rent') === 'yes' &&
                 <IonItem lines="none">
                     <IonLabel position="floating">Landloard Phone</IonLabel>
-                    <IonInput type="text" name="landlordPhone" required onIonBlur={e => props.updateForm(e, 'landlordPhone') }></IonInput>
+                    <IonInput type="text" name="landlordPhone" onIonBlur={e => props.updateForm(e, 'landlordPhone') }></IonInput>
                 </IonItem>
             }
             { show &&  

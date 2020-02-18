@@ -124,6 +124,7 @@ const Adopt = (props: any) => {
     var isValid = true;
     var list = "";
     
+    /*
     Object.keys(form).map(function(keyName, keyIndex) {
       if (form[keyName] === "" && !keyName.includes("dog")) {
         isValid = false;
@@ -139,7 +140,7 @@ const Adopt = (props: any) => {
     if (list.length !== 0) {
       setValidModal(true);
       setInvalidList(list);
-    }
+    }*/
 
     if (isValid) {
       setShowModal(true);
