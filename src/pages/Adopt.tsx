@@ -104,7 +104,7 @@ const Adopt = (props: any) => {
   }
 
   function getFormData(value) {
-    return form[value];
+    return form[value] || null;
   }
 
   function setTermsOfService(value) {
@@ -180,7 +180,7 @@ const Adopt = (props: any) => {
                 <DogSelect doggies={doggies} getDogOptions={getDogOptions}/>
                 <TermsOfService updateForm={updateForm} setTermsOfService={setTermsOfService}/>
               </IonList>
-              <IonButton expand="block" onClick={submit}>Submit</IonButton>
+              <IonButton expand="block" onClick={submit} disabled={!getFormData('terms')}>Submit</IonButton>
             </IonCol>
             <IonCol size="2" />
           </IonRow>
