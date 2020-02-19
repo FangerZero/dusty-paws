@@ -129,6 +129,7 @@ const Adopt = (props: any) => {
         isValid = false;
         list += keyIndex ? `, ${keyName}` : keyName;
       }
+      return list;
     });
 
     if (list.length !== 0) {
