@@ -1,5 +1,6 @@
 import { IonImg, IonGrid, IonRow, IonCol, IonDatetime, IonButton } from '@ionic/react';
 import React, { useState } from 'react';
+import Dog from '../images/default-dog.svg';
 
 import fire from '../fire';
 
@@ -41,8 +42,8 @@ const Spotlight = (props: any) => {
   return (
     <IonGrid>
         <IonRow>
-            <IonCol offsetMd="2"  sizeMd="4" sizeXs="12">
-              <IonImg src={img}/>
+            <IonCol offsetMd="3"  sizeMd="3" sizeXs="12">
+              <IonImg src={img || Dog}/>
             </IonCol>
             <IonCol>
               <IonButton href={`/adopt?${id}`}>Adopt</IonButton>
