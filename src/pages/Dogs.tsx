@@ -99,6 +99,7 @@ const Dogs = () => {
         </IonGrid>
         <Footer />
         <IonModal isOpen={showModal} backdropDismiss={false}>
+          <IonContent>
             <IonList>
               <IonItem lines="none">
                 <h3>{displayData.name} </h3>
@@ -121,6 +122,7 @@ const Dogs = () => {
                 <IonButton expand="block" href={`/adopt?${displayData.id}`}>Adopt</IonButton>
               }
             </IonList>
+          </IonContent>
         </IonModal>
       </IonContent>
     </IonPage>

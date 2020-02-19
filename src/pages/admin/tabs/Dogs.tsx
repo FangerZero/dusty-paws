@@ -192,81 +192,83 @@ const AdminDogs = () => {
         </IonGrid>
         
         <IonModal isOpen={showModal} backdropDismiss={false}>
-          <IonList>
-            <IonItem lines="none">
-              <h3><IonInput name="name" placeholder="Dog Name" value={displayData.name} disabled={!edit} onBlur={e => saveChange(e, 'name', displayData.id)}></IonInput></h3>
-              <IonButton slot="end" onClick={() => {setEdit(!edit); setEditWord(edit ? 'Edit' : 'Done')}}>{editWord}</IonButton>
-              <IonButton slot="end" onClick={() => {setEdit(false); setEditWord('Edit'); setShowModal(false); resetDisplayData();}}>Close</IonButton>
-            </IonItem>
-            <IonItem lines="none">
-              <IonGrid>
-                <IonRow>
-                  <IonCol>  
-                    <IonItem lines="none">
-                      <IonLabel position="stacked">Age</IonLabel>
-                      <IonInput name="age" placeholder="Age" value={displayData.age} disabled={!edit} onBlur={e => saveChange(e, 'age', displayData.id)}/>
-                      </IonItem>    
+          <IonContent>
+            <IonList>
+              <IonItem lines="none">
+                <h3><IonInput name="name" placeholder="Dog Name" value={displayData.name} disabled={!edit} onBlur={e => saveChange(e, 'name', displayData.id)}></IonInput></h3>
+                <IonButton slot="end" onClick={() => {setEdit(!edit); setEditWord(edit ? 'Edit' : 'Done')}}>{editWord}</IonButton>
+                <IonButton slot="end" onClick={() => {setEdit(false); setEditWord('Edit'); setShowModal(false); resetDisplayData();}}>Close</IonButton>
+              </IonItem>
+              <IonItem lines="none">
+                <IonGrid>
+                  <IonRow>
+                    <IonCol>  
+                      <IonItem lines="none">
+                        <IonLabel position="stacked">Age</IonLabel>
+                        <IonInput name="age" placeholder="Age" value={displayData.age} disabled={!edit} onBlur={e => saveChange(e, 'age', displayData.id)}/>
+                        </IonItem>    
+                      </IonCol>
+                    <IonCol>      
+                      <IonItem lines="none">
+                        <IonLabel position="stacked">Date Arrived</IonLabel>
+                        <IonDatetime displayFormat="MMMM DD, YYYY" placeholder="Date Arrived" disabled={!edit} value={displayData.arrival} onBlur={e => saveChange(e, 'arrival', displayData.id)}/>
+                      </IonItem>
                     </IonCol>
-                  <IonCol>      
-                    <IonItem lines="none">
-                      <IonLabel position="stacked">Date Arrived</IonLabel>
-                      <IonDatetime displayFormat="MMMM DD, YYYY" placeholder="Date Arrived" disabled={!edit} value={displayData.arrival} onBlur={e => saveChange(e, 'arrival', displayData.id)}/>
-                    </IonItem>
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
-            </IonItem>
-            <IonItem lines="none">
-              <IonLabel position="stacked">Breed</IonLabel>
-              <IonInput name="breed" placeholder="Breed" value={displayData.breed} disabled={!edit} onBlur={e => saveChange(e, 'breed', displayData.id)}/>
-            </IonItem>
-            <IonItem lines="none">
-              <IonGrid>
-                <IonRow>
-                  <IonCol>      
-                    <IonItem lines="none">
-                      <IonLabel position="stacked">Fee</IonLabel>
-                      <IonInput name="fee" placeholder="Fee" value={displayData.fee} disabled={!edit} onBlur={e => saveChange(e, 'fee', displayData.id)}/>
-                    </IonItem>
-                  </IonCol>
-                  <IonCol>      
-                    <IonItem lines="none">
-                      <IonLabel position="stacked">Fixed</IonLabel>
-                      <IonCheckbox name="fixed" disabled={!edit} checked={displayData.fixed} onBlur={e => saveChange(e, 'fixed', displayData.id)}/>
-                    </IonItem>
-                  </IonCol>
-                  <IonCol>      
-                    <IonItem lines="none">
-                      <IonLabel position="stacked">Adopted</IonLabel>
-                      <IonCheckbox name="adopted" disabled={!edit} checked={displayData.adopted} onBlur={e => saveChange(e, 'adopted', displayData.id)}/>
-                    </IonItem>
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
-            </IonItem>
-            <IonItem>
-              <IonLabel position="stacked">Description</IonLabel>
-              <IonTextarea
-                name="description"
-                disabled={!edit}
-                value={displayData.description}
-                placeholder="Description"
-                onBlur={e => saveChange(e, 'description', displayData.id)}>
-              </IonTextarea>
-            </IonItem>
-            <IonItem lines="none">
-              <IonLabel position="stacked">Photos</IonLabel>
-              <IonCard>
-                Profile: 
-                <input id="profile-file" type="file" name="file-a" onChange={imgSelectedHandler} />
-              </IonCard>
-              <IonCard>
-                Picutres: 
-                <input id="img-files" type="file" name="file-a" onChange={imgSelectedHandler} />
-              </IonCard>
-            </IonItem>
-          </IonList>
-          <IonButton expand="block" onClick={() => confirmDelete()}>Remove</IonButton>
+                  </IonRow>
+                </IonGrid>
+              </IonItem>
+              <IonItem lines="none">
+                <IonLabel position="stacked">Breed</IonLabel>
+                <IonInput name="breed" placeholder="Breed" value={displayData.breed} disabled={!edit} onBlur={e => saveChange(e, 'breed', displayData.id)}/>
+              </IonItem>
+              <IonItem lines="none">
+                <IonGrid>
+                  <IonRow>
+                    <IonCol>      
+                      <IonItem lines="none">
+                        <IonLabel position="stacked">Fee</IonLabel>
+                        <IonInput name="fee" placeholder="Fee" value={displayData.fee} disabled={!edit} onBlur={e => saveChange(e, 'fee', displayData.id)}/>
+                      </IonItem>
+                    </IonCol>
+                    <IonCol>      
+                      <IonItem lines="none">
+                        <IonLabel position="stacked">Fixed</IonLabel>
+                        <IonCheckbox name="fixed" disabled={!edit} checked={displayData.fixed} onBlur={e => saveChange(e, 'fixed', displayData.id)}/>
+                      </IonItem>
+                    </IonCol>
+                    <IonCol>      
+                      <IonItem lines="none">
+                        <IonLabel position="stacked">Adopted</IonLabel>
+                        <IonCheckbox name="adopted" disabled={!edit} checked={displayData.adopted} onBlur={e => saveChange(e, 'adopted', displayData.id)}/>
+                      </IonItem>
+                    </IonCol>
+                  </IonRow>
+                </IonGrid>
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">Description</IonLabel>
+                <IonTextarea
+                  name="description"
+                  disabled={!edit}
+                  value={displayData.description}
+                  placeholder="Description"
+                  onBlur={e => saveChange(e, 'description', displayData.id)}>
+                </IonTextarea>
+              </IonItem>
+              <IonItem lines="none">
+                <IonLabel position="stacked">Photos</IonLabel>
+                <IonCard>
+                  Profile: 
+                  <input id="profile-file" type="file" name="file-a" onChange={imgSelectedHandler} />
+                </IonCard>
+                <IonCard>
+                  Picutres: 
+                  <input id="img-files" type="file" name="file-a" onChange={imgSelectedHandler} />
+                </IonCard>
+              </IonItem>
+            </IonList>
+            <IonButton expand="block" onClick={() => confirmDelete()}>Remove</IonButton>
+          </IonContent>
         </IonModal>
 
         <IonModal isOpen={showNewDog} backdropDismiss={false}>

@@ -248,37 +248,39 @@ const AdminApplications = () => {
         </IonGrid>
         
         <IonModal isOpen={showModal} backdropDismiss={false}>
-          <IonList>
-            <IonItem lines="none">
-              <h3><IonInput name="name" value={`${displayData.lastName}, ${displayData.firstName}`} disabled /></h3>
-              <IonButton slot="end" onClick={() => {setShowModal(false); resetDispalyData();}}>Close</IonButton>
-            </IonItem>
-            <IonItem lines="none">
-              <IonLabel position="stacked">Address</IonLabel>
-              <IonInput name="name" value={`${displayData.address_1}`} disabled />
-              <IonInput name="name" value={`${displayData.city}, ${displayData.state} ${displayData.zip}`} disabled />
-            </IonItem>
-            <IonItem lines="none">
-              <IonLabel position="stacked">Phone</IonLabel>
-              <IonInput name="name" value={`${displayData.phone}`} disabled />
-            </IonItem>
-            <IonItem lines="none">
-              <IonLabel position="stacked">Dogs</IonLabel>
-              {displayData.id && getDogOptions('dog_1')}
-              {displayData.id && getDogOptions('dog_2')}
-              {displayData.id && getDogOptions('dog_3')}
-            </IonItem>
-            <IonItem lines="none">
-              <IonLabel position="floating">Notes</IonLabel>
-              <IonTextarea
-                name="notes"
-                value={displayData.notes}
-                placeholder="Notes"
-                onBlur={e => saveChange(e, 'notes', displayData.id)}>
-              </IonTextarea>
-            </IonItem>
-          </IonList>
-          <IonButton expand="block" onClick={() => confirmDelete()}>Remove</IonButton>
+          <IonContent>
+            <IonList>
+              <IonItem lines="none">
+                <h3><IonInput name="name" value={`${displayData.lastName}, ${displayData.firstName}`} disabled /></h3>
+                <IonButton slot="end" onClick={() => {setShowModal(false); resetDispalyData();}}>Close</IonButton>
+              </IonItem>
+              <IonItem lines="none">
+                <IonLabel position="stacked">Address</IonLabel>
+                <IonInput name="name" value={`${displayData.address_1}`} disabled />
+                <IonInput name="name" value={`${displayData.city}, ${displayData.state} ${displayData.zip}`} disabled />
+              </IonItem>
+              <IonItem lines="none">
+                <IonLabel position="stacked">Phone</IonLabel>
+                <IonInput name="name" value={`${displayData.phone}`} disabled />
+              </IonItem>
+              <IonItem lines="none">
+                <IonLabel position="stacked">Dogs</IonLabel>
+                {displayData.id && getDogOptions('dog_1')}
+                {displayData.id && getDogOptions('dog_2')}
+                {displayData.id && getDogOptions('dog_3')}
+              </IonItem>
+              <IonItem lines="none">
+                <IonLabel position="floating">Notes</IonLabel>
+                <IonTextarea
+                  name="notes"
+                  value={displayData.notes}
+                  placeholder="Notes"
+                  onBlur={e => saveChange(e, 'notes', displayData.id)}>
+                </IonTextarea>
+              </IonItem>
+            </IonList>
+            <IonButton expand="block" onClick={() => confirmDelete()}>Remove</IonButton>
+          </IonContent>
         </IonModal>
 
         <IonAlert
