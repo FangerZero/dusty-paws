@@ -46,9 +46,9 @@ const DogImg = (props: any) => {
   
   function displayImg() {
       if (img0 === "") {
-        setImg0('meow');
+        setImg0(Dog);
       }
-      
+
       return (
         <IonRow>
             <IonCol sizeMd="2" sizeXs="4">
