@@ -5,36 +5,70 @@ import fire from '../fire';
 import Dog from '../images/default-dog.svg';
 
 const DogImg = (props: any) => {
-  const [ imgs, setImgs ] = useState([]);
-  const [ render, setRender] = useState(false);
+  const [ img0, setImg0 ] = useState('');
+  const [ img1, setImg1 ] = useState('');
+  const [ img2, setImg2 ] = useState('');
+  const [ img3, setImg3 ] = useState('');
+  const [ img4, setImg4 ] = useState('');
+  const [ img5, setImg5 ] = useState('');
+  // const [ render, setRender] = useState(false);
   
-  if (!imgs.length) {
+  if (img0 === "") {
     loadImages();
   }
 
+  
   function loadImages() {
     const storageRef = fire.storage().ref();
     const imagesRef = storageRef.child(`dogs/${props.id}/`);
 
     imagesRef.listAll().then(res => {
-      res.items.forEach(itemRef => {
-        itemRef.getDownloadURL().then(url => setImgs([...imgs, url]))
+      res.items.map((itemRef, i) => {
+        itemRef.getDownloadURL().then(url => {
+          if (i === 0) {
+            setImg0(url);
+          } else if (i === 1) {
+            setImg1(url);
+          } else if (i === 2) {
+            setImg2(url);
+          } else if (i === 3) {
+            setImg3(url);
+          } else if (i === 4) {
+            setImg4(url);
+          } else if (i === 5) {
+            setImg5(url);
+          }
+        })
       })
-    }).then(() => setRender(true)).catch(function(error) {
-      console.log('error: ', error);
-    });
+    })
+    
   }
   
   function displayImg() {
-    console.log('0: ', imgs[0]);
-    console.log('1: ', imgs[1]);
+      if (img0 === "") {
+        setImg0('meow');
+      }
+      
       return (
         <IonRow>
-          {imgs.map((el, i) => 
-            <IonCol key={i} sizeMd="2" sizeXs="4">
-              <IonImg src={el || Dog} ></IonImg>
+            <IonCol sizeMd="2" sizeXs="4">
+              <IonImg src={img0 || Dog} ></IonImg>
             </IonCol>
-          )}
+            {img1 && <IonCol sizeMd="2" sizeXs="4">
+              <IonImg src={img1 || Dog} ></IonImg>
+            </IonCol>}
+            {img2 && <IonCol sizeMd="2" sizeXs="4">
+              <IonImg src={img2 || Dog} ></IonImg>
+            </IonCol>}
+            {img3 && <IonCol sizeMd="2" sizeXs="4">
+              <IonImg src={img3 || Dog} ></IonImg>
+            </IonCol>}
+            {img4 && <IonCol sizeMd="2" sizeXs="4">
+              <IonImg src={img4 || Dog} ></IonImg>
+            </IonCol>}
+            {img5 && <IonCol sizeMd="2" sizeXs="4">
+              <IonImg src={img4 || Dog} ></IonImg>
+            </IonCol>}
         </IonRow>
       );
   }
@@ -45,8 +79,7 @@ const DogImg = (props: any) => {
 
   return (
     <IonGrid>
-      {render && displayImg()}
-      {!imgs.length && noImages()}
+      {img0.length ? displayImg() : noImages()}
     </IonGrid>
   );
 }
