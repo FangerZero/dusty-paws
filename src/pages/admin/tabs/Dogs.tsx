@@ -105,6 +105,7 @@ const AdminDogs = () => {
   function displayProfile(data) {
     setShowModal(!showModal);
     setDisplayData({...data});
+    getImgs(data.id);
   }
 
   function changeName(e) {
@@ -247,7 +248,6 @@ const AdminDogs = () => {
         </IonGrid>
         
         <IonModal isOpen={showModal} backdropDismiss={false}>
-          {getImgs(displayData.id)}
           <IonContent>
             <IonList>
               <IonItem lines="none">
