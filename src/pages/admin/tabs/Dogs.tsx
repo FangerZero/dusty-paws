@@ -1,7 +1,8 @@
-import { IonContent, IonPage, IonGrid, IonRow, IonCol, useIonViewDidEnter, IonDatetime, IonModal, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonTextarea, IonAlert, IonLabel, IonCheckbox } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonRow, IonCol, useIonViewDidEnter, IonDatetime, IonModal, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonTextarea, IonAlert, IonLabel, IonCheckbox, IonThumbnail, IonImg } from '@ionic/react';
 import React, { useState } from 'react';
 
 import fire from '../../../fire';
+import Dog from '../../../images/default-dog.svg';
 
 const AdminDogs = () => {
   // Dog Info
@@ -24,7 +25,13 @@ const AdminDogs = () => {
   const [ edit, setEdit ] = useState(false);
   const [ editWord, setEditWord ] = useState('Edit');
   const [ newDog, setNewDog ] = useState('');
-  const [ showAlert1, setShowAlert1] = useState(false);
+  const [ showAlert1, setShowAlert1 ] = useState(false);
+  const [ profileImg, setProfileImg ] = useState('');
+  const [ altImg1, setAltImg1 ] = useState('');
+  const [ altImg2, setAltImg2 ] = useState('');
+  const [ altImg3, setAltImg3 ] = useState('');
+  const [ altImg4, setAltImg4 ] = useState('');
+  const [ altImg5, setAltImg5 ] = useState('');
 
   useIonViewDidEnter(() => {
     if (doggies.length === 0) {
@@ -35,28 +42,42 @@ const AdminDogs = () => {
   function imgSelectedHandler(event) {
     const megabyte = 5048576;
     const files = event.target.files;
-
-    if (files.length <= 5) {
       Array.prototype.forEach.call(files, file => {
         
-        if (file.size < megabyte) {
-          if (event.target.id === 'profile-file') {
-            storageRef.child('dogs/'+displayData.id+'/profile.jpg').delete().then(function() {
+      if (file.size < megabyte) {
+        if (event.target.id === 'profile-file') {
+          storageRef.child('dogs/'+displayData.id+'/profile.jpg').delete().then(function() {
+            storageRef.child('dogs/'+displayData.id+'/profile.jpg').put(file);
+          }).catch(function(error) {
+            if (error.code_ === 'storage/object-not-found') {
               storageRef.child('dogs/'+displayData.id+'/profile.jpg').put(file);
-            }).catch(function(error) {
-              if (error.code_ === 'storage/object-not-found') {
-                storageRef.child('dogs/'+displayData.id+'/profile.jpg').put(file);
-              } else {
-                console.log('error: ', error);
-              }
-            });
-          } else {
-            let genId = Math.random() * 100000;
-            storageRef.child('dogs/'+displayData.id+'/'+genId+'.jpg').put(file);
+            } else {
+              console.log('error: ', error);
+            }
+          });
+        } else {
+          let name = '';
+          switch(event.target.id) {
+            case "img-file-1":
+                name = 'img-1';
+              break;
+            case "img-file-2":
+                name = 'img-2';
+              break;
+            case "img-file-3":
+                name = 'img-3';
+              break;
+            case "img-file-4":
+                name = 'img-4';
+              break;
+            case "img-file-5":
+                name = 'img-5';
+              break;
           }
+          storageRef.child('dogs/'+displayData.id+'/'+name+'.jpg').put(file);
         }
-      });
-    }
+      }
+    });
   }
 
   function loadDogs() {
@@ -123,6 +144,7 @@ const AdminDogs = () => {
   }
   
   function resetDisplayData() {
+    
     setDisplayData({
       id: "",
       name: "",
@@ -134,6 +156,13 @@ const AdminDogs = () => {
       fee: "",
       adopted: false,
     });
+
+    setProfileImg(Dog);
+    setAltImg1(Dog);
+    setAltImg2(Dog);
+    setAltImg3(Dog);
+    setAltImg4(Dog);
+    setAltImg5(Dog);
   }
 
   function confirmDelete() {
@@ -146,6 +175,32 @@ const AdminDogs = () => {
     setDogs(dogs);
     setShowModal(false);
     docRef.delete();
+  }
+
+  function getImgs(id) {
+    const storageRef = fire.storage().ref();
+    const imagesRef = storageRef.child(`dogs/${id}/`);
+
+    imagesRef.listAll().then(res => {
+      res.items.map(itemRef => {
+        itemRef.getDownloadURL().then(url => {
+          if (url.includes('profile')) {
+            setProfileImg(url || Dog)
+          } else if (url.includes('img-1')) {
+            setAltImg1(url || Dog);
+          } else if (url.includes('img-2')) {
+            setAltImg2(url || Dog);
+          } else if (url.includes('img-3')) {
+            setAltImg3(url || Dog);
+          } else if (url.includes('img-4')) {
+            setAltImg4(url || Dog);
+          } else if (url.includes('img-5')) {
+            setAltImg5(url || Dog);
+          }
+        })
+        return itemRef;
+      })
+    })
   }
 
   return (
@@ -192,6 +247,7 @@ const AdminDogs = () => {
         </IonGrid>
         
         <IonModal isOpen={showModal} backdropDismiss={false}>
+          {getImgs(displayData.id)}
           <IonContent>
             <IonList>
               <IonItem lines="none">
@@ -255,15 +311,53 @@ const AdminDogs = () => {
                   onBlur={e => saveChange(e, 'description', displayData.id)}>
                 </IonTextarea>
               </IonItem>
+              <IonItem>
+                Only JPG Images are accepted
+              </IonItem>
               <IonItem lines="none">
-                <IonLabel position="stacked">Photos</IonLabel>
+                <IonLabel position="fixed">Profile Image:</IonLabel>
                 <IonCard>
-                  Profile: 
-                  <input id="profile-file" type="file" name="file-a" onChange={imgSelectedHandler} />
+                  <IonThumbnail slot="start">
+                    <IonImg src={profileImg || Dog}/>
+                  </IonThumbnail>
+                  <input id="profile-file" type="file" name="file-0" accept=".jpg" onChange={imgSelectedHandler} />
                 </IonCard>
+              </IonItem>
+              <IonItem>
                 <IonCard>
-                  Picutres: 
-                  <input id="img-files" type="file" name="file-a" onChange={imgSelectedHandler} />
+                  <IonLabel position="fixed">Alternate Images:</IonLabel>
+                  <IonList>
+                    <IonItem>
+                    <IonThumbnail slot="start">
+                      <IonImg src={altImg1 || Dog} />
+                    </IonThumbnail>
+                      <input id="img-file-1" type="file" name="file-1" accept=".jpg" onChange={imgSelectedHandler} />
+                    </IonItem>
+                    <IonItem>
+                      <IonThumbnail slot="start">
+                        <IonImg src={altImg2 || Dog} />
+                      </IonThumbnail>
+                      <input id="img-file-2" type="file" name="file-2" accept=".jpg" onChange={imgSelectedHandler} />
+                    </IonItem>
+                    <IonItem>
+                      <IonThumbnail slot="start">
+                        <IonImg src={altImg3 || Dog} />
+                      </IonThumbnail>
+                      <input id="img-file-3" type="file" name="file-3" accept=".jpg" onChange={imgSelectedHandler} />
+                    </IonItem>
+                    <IonItem>
+                      <IonThumbnail slot="start">
+                        <IonImg src={altImg4 || Dog} />
+                      </IonThumbnail>
+                      <input id="img-file-4" type="file" name="file-4" accept=".jpg" onChange={imgSelectedHandler} />
+                    </IonItem>
+                    <IonItem>
+                      <IonThumbnail slot="start">
+                        <IonImg src={altImg5 || Dog} />
+                      </IonThumbnail>
+                      <input id="img-file-5" type="file" name="file-5" accept=".jpg" onChange={imgSelectedHandler} />
+                    </IonItem>
+                  </IonList>
                 </IonCard>
               </IonItem>
             </IonList>
