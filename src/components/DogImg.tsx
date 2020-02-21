@@ -68,7 +68,7 @@ const DogImg = (props: any) => {
               <IonImg src={img4 || Dog} ></IonImg>
             </IonCol>}
             {img5 && <IonCol sizeMd="2" sizeXs="4">
-              <IonImg src={img4 || Dog} ></IonImg>
+              <IonImg src={img5 || Dog} ></IonImg>
             </IonCol>}
         </IonRow>
       );
