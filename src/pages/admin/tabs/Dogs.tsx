@@ -217,11 +217,32 @@ const AdminDogs = () => {
   }
 
   function deleteDog(dogId) {
+    // Delete Data
     var docRef = db.collection("dogs").doc(dogId);
     var dogs = doggies.filter(dog => dog.id !== dogId);
     setDogs(dogs);
     setShowModal(false);
     docRef.delete();
+    /* if We ever get dir deletion powers
+    const storageRef = fire.storage().ref();
+    const imagesRef = storageRef.child(`dogs/`);
+    imagesRef.listAll().then(test => {
+      test.prefixes.forEach(prefix => {
+        if (prefix.fullPath.includes(dogId)) {
+          prefix.delete();
+        }
+      })
+    })
+    */
+    // Delete Images
+    const storageRef = fire.storage().ref();
+    const imagesRef = storageRef.child(`dogs/${dogId}`);
+    imagesRef.listAll().then(res => {
+      res.items.forEach(itemRef => {
+        itemRef.delete();
+      })
+    })
+    
   }
 
   function getImgs(id) {
