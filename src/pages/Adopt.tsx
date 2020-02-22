@@ -181,7 +181,7 @@ const Adopt = (props: any) => {
             <IonCol size="2" />
           </IonRow>
         </IonGrid>
-        <BreedInfo infoModal={infoModal}/>
+        <BreedInfo infoModal={infoModal} setInfoModal={setInfoModal} />
         <AppComplete showModal={showModal} />
         <AppError validModal={validModal} invalidList={invalidList} setValidModal={setValidModal} />
         <Footer />

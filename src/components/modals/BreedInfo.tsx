@@ -4,7 +4,7 @@ import React from 'react';
 const BreedInfo = (props: any) => {
     return (
       <IonModal isOpen={props.infoModal}>
-        <IonContent>
+        <IonContent onClick={() => props.setInfoModal(false)}>
           <IonGrid>
             <IonRow>
               <IonCol>
