@@ -82,7 +82,6 @@ const Adopt = (props: any) => {
         dogHumanLocal: "",
         dogSleepLocal: "",
         dogUnprepared: [],
-        dogPreference: "",
         dogSize: "",
         dogBreed: "",
         dogAge: "",

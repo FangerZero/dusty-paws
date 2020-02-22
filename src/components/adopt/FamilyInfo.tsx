@@ -13,7 +13,7 @@ const FamilyInfo = (props: any) => {
             { show &&
                 <IonItem lines="none">
                     <IonLabel position="floating">Number of Adults and their age in household</IonLabel>
-                    <IonTextarea name="adult" required onIonBlur={e => props.updateForm(e, 'adult') } rows={1} />
+                    <IonTextarea name="adults" required onIonBlur={e => props.updateForm(e, 'adults') } rows={1} />
                 </IonItem>
             }
             { show &&  
