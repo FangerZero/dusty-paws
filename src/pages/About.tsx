@@ -16,8 +16,10 @@ const About: React.FC = () => {
               <img src={Dusty} alt="Dusty"/>
             </IonCol>
             <IonCol offsetLg="0" sizeLg="5" offsetXs="0" sizeXs="12">
-              <h1>Dusty Someone - Founder</h1>git 
-              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+              <h1>Dusty Someone - Founder</h1> 
+              <p>
+                I started dusty paws because...
+              </p>
             </IonCol>
           </IonRow>
           <IonRow>
@@ -26,7 +28,7 @@ const About: React.FC = () => {
             </IonCol>
             <IonCol offsetLg="0" sizeLg="5" offsetXs="0" sizeXs="12">
               <h1>April McDowell - Co-Founder</h1>
-              <p>Started helping because of XYZ. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+              <p>I have a great peryeneese named Snowy. </p>
             </IonCol>
           </IonRow>
         </IonGrid>
