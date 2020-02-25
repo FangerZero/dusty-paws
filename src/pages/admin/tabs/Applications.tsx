@@ -232,7 +232,7 @@ const AdminApplications = () => {
   
   return (
     <IonPage>
-      <IonContent className="ion-padding">
+      <IonContent className="ion-padding background">
         <IonGrid>
           <IonRow>
             <IonCol sizeMd="1" sizeSm="0"/>

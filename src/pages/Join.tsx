@@ -7,7 +7,7 @@ const Join: React.FC = () => {
   return (
     <IonPage>
       <Navi />
-      <IonContent className="ion-padding">
+      <IonContent className="ion-padding background">
         <IonGrid>
           <IonRow>
             <IonCol offsetLg="4">

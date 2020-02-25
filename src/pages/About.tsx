@@ -9,7 +9,7 @@ const About: React.FC = () => {
   return (
     <IonPage>
       <Navi />
-      <IonContent className="ion-padding">
+      <IonContent className="ion-padding background">
         <IonGrid>
           <IonRow>
             <IonCol offsetLg="2" sizeLg="3" offsetXs="0" sizeXs="12">
