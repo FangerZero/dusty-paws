@@ -66,7 +66,7 @@ const Dogs = () => {
                   {doggies && 
                     doggies.map((el, index) => {
                       return (
-                        <IonCol key={index} sizeMd="2" sizeXs="12">
+                        <IonCol key={index} sizeMd="4" sizeXs="12">
                           <IonCard class="background" onClick={() => displayProfile(el)}>
                             <ProfileImg id={el.id}/>
                             <IonCardHeader>
