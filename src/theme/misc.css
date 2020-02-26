@@ -8,3 +8,6 @@ ion-content.background {
 ion-card.background {
   --background: white;
 }
+ion-col.background {
+  background: white;
+}

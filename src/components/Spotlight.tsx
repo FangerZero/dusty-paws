@@ -42,10 +42,10 @@ const Spotlight = (props: any) => {
   return (
     <IonGrid>
         <IonRow>
-            <IonCol offsetMd="3"  sizeMd="3" sizeXs="12">
+            <IonCol class="background" offsetMd="3" sizeMd="3" sizeXs="12">
               <IonImg src={img || Dog}/>
             </IonCol>
-            <IonCol>
+            <IonCol class="background" sizeMd="3" sizeXs="12">
               <IonButton href={`/adopt?${id}`}>Adopt</IonButton>
               <br />
               <h3>{name}</h3>
