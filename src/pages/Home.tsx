@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <IonPage>
       <Navi />
-      <IonContent>
+      <IonContent class="background">
         <IonImg src={Top} />
         <Spotlight dog={spotlight}/>
         

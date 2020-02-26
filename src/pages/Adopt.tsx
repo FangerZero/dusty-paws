@@ -82,7 +82,6 @@ const Adopt = (props: any) => {
         dogHumanLocal: "",
         dogSleepLocal: "",
         dogUnprepared: [],
-        dogPreference: "",
         dogSize: "",
         dogBreed: "",
         dogAge: "",
@@ -147,7 +146,7 @@ const Adopt = (props: any) => {
   return (
     <IonPage>
       <Navi />
-      <IonContent className="ion-padding">
+      <IonContent className="ion-padding background">
         <IonGrid>
           <IonRow>
             <IonCol offsetMd="2">
@@ -181,7 +180,7 @@ const Adopt = (props: any) => {
             <IonCol size="2" />
           </IonRow>
         </IonGrid>
-        <BreedInfo infoModal={infoModal}/>
+        <BreedInfo infoModal={infoModal} setInfoModal={setInfoModal} />
         <AppComplete showModal={showModal} />
         <AppError validModal={validModal} invalidList={invalidList} setValidModal={setValidModal} />
         <Footer />

@@ -1,5 +1,6 @@
 import { IonContent, IonPage, IonGrid, IonRow, IonCol, useIonViewDidEnter, IonDatetime, IonModal, IonButton, IonList, IonItem, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonInput, IonTextarea, IonAlert, IonLabel, IonCheckbox, IonThumbnail, IonImg } from '@ionic/react';
 import React, { useState } from 'react';
+import imageCompression from "../../../../node_modules/browser-image-compression/dist/browser-image-compression";
 
 import fire from '../../../fire';
 import Dog from '../../../images/default-dog.svg';
@@ -32,18 +33,22 @@ const AdminDogs = () => {
   const [ altImg3, setAltImg3 ] = useState('');
   const [ altImg4, setAltImg4 ] = useState('');
   const [ altImg5, setAltImg5 ] = useState('');
+  const options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+  }
 
   useIonViewDidEnter(() => {
     if (doggies.length === 0) {
       loadDogs();
     }
   })
-
+/*
   function imgSelectedHandler(event) {
     const megabyte = 5048576;
     const files = event.target.files;
-      Array.prototype.forEach.call(files, file => {
-        
+
+    Array.prototype.forEach.call(files, file => {
       if (file.size < megabyte) {
         if (event.target.id === 'profile-file') {
           storageRef.child('dogs/'+displayData.id+'/profile.jpg').delete().then(function() {
@@ -78,6 +83,47 @@ const AdminDogs = () => {
         }
       }
     });
+  }*/
+
+  function fileCompression(event) {
+    var imageFile = event.target.files[0];
+    var imageType = event.target.id;
+    
+    imageCompression(imageFile, options)
+      .then(compressedFile => {
+        console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+        console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+  
+        return uploadToServer(compressedFile, imageType); // write your own logic
+      })
+      .catch(function (error) {
+        console.log(error.message);
+      })
+  }
+
+  function uploadToServer(file, type) {
+    let name = '';
+    switch(type) {
+      case "profile-file":
+        name = "profile"
+        break;
+      case "img-file-1":
+        name =  "img-1";
+        break;
+      case "img-file-2":
+        name = "img-2";
+        break;
+      case "img-file-3":
+        name = "img-3";
+        break;
+      case "img-file-4":
+        name = "img-4";
+        break;
+      case "img-file-5":
+        name = "img-5";
+        break;
+    }
+    storageRef.child('dogs/'+displayData.id+'/'+name+'.jpg').put(file);
   }
 
   function loadDogs() {
@@ -171,11 +217,32 @@ const AdminDogs = () => {
   }
 
   function deleteDog(dogId) {
+    // Delete Data
     var docRef = db.collection("dogs").doc(dogId);
     var dogs = doggies.filter(dog => dog.id !== dogId);
     setDogs(dogs);
     setShowModal(false);
     docRef.delete();
+    /* if We ever get dir deletion powers
+    const storageRef = fire.storage().ref();
+    const imagesRef = storageRef.child(`dogs/`);
+    imagesRef.listAll().then(test => {
+      test.prefixes.forEach(prefix => {
+        if (prefix.fullPath.includes(dogId)) {
+          prefix.delete();
+        }
+      })
+    })
+    */
+    // Delete Images
+    const storageRef = fire.storage().ref();
+    const imagesRef = storageRef.child(`dogs/${dogId}`);
+    imagesRef.listAll().then(res => {
+      res.items.forEach(itemRef => {
+        itemRef.delete();
+      })
+    })
+    
   }
 
   function getImgs(id) {
@@ -206,7 +273,7 @@ const AdminDogs = () => {
 
   return (
     <IonPage>
-      <IonContent className="ion-padding">
+      <IonContent className="ion-padding background">
         <IonGrid>
           <IonRow>
             <IonCol sizeMd="1" sizeSm="0"/>
@@ -320,7 +387,7 @@ const AdminDogs = () => {
                   <IonThumbnail slot="start">
                     <IonImg src={profileImg || Dog}/>
                   </IonThumbnail>
-                  <input id="profile-file" type="file" name="file-0" accept=".jpg" onChange={imgSelectedHandler} />
+                  <input id="profile-file" type="file" name="file-0" accept=".jpg" onChange={fileCompression} />
                 </IonCard>
               </IonItem>
               <IonItem>
@@ -331,31 +398,31 @@ const AdminDogs = () => {
                     <IonThumbnail slot="start">
                       <IonImg src={altImg1 || Dog} />
                     </IonThumbnail>
-                      <input id="img-file-1" type="file" name="file-1" accept=".jpg" onChange={imgSelectedHandler} />
+                      <input id="img-file-1" type="file" name="file-1" accept=".jpg" onChange={fileCompression} />
                     </IonItem>
                     <IonItem>
                       <IonThumbnail slot="start">
                         <IonImg src={altImg2 || Dog} />
                       </IonThumbnail>
-                      <input id="img-file-2" type="file" name="file-2" accept=".jpg" onChange={imgSelectedHandler} />
+                      <input id="img-file-2" type="file" name="file-2" accept=".jpg" onChange={fileCompression} />
                     </IonItem>
                     <IonItem>
                       <IonThumbnail slot="start">
                         <IonImg src={altImg3 || Dog} />
                       </IonThumbnail>
-                      <input id="img-file-3" type="file" name="file-3" accept=".jpg" onChange={imgSelectedHandler} />
+                      <input id="img-file-3" type="file" name="file-3" accept=".jpg" onChange={fileCompression} />
                     </IonItem>
                     <IonItem>
                       <IonThumbnail slot="start">
                         <IonImg src={altImg4 || Dog} />
                       </IonThumbnail>
-                      <input id="img-file-4" type="file" name="file-4" accept=".jpg" onChange={imgSelectedHandler} />
+                      <input id="img-file-4" type="file" name="file-4" accept=".jpg" onChange={fileCompression} />
                     </IonItem>
                     <IonItem>
                       <IonThumbnail slot="start">
                         <IonImg src={altImg5 || Dog} />
                       </IonThumbnail>
-                      <input id="img-file-5" type="file" name="file-5" accept=".jpg" onChange={imgSelectedHandler} />
+                      <input id="img-file-5" type="file" name="file-5" accept=".jpg" onChange={fileCompression} />
                     </IonItem>
                   </IonList>
                 </IonCard>

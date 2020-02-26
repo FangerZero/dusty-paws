@@ -32,7 +32,7 @@ const AdminHome = () => {
 
   function pageRender() {
     return (
-      <IonContent>
+      <IonContent class="background">
         <IonTabs>
           <IonRouterOutlet>
             <Route path="/admin/home" render={() => <Settings />} exact={true} />

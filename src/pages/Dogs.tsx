@@ -56,7 +56,7 @@ const Dogs = () => {
   return (
     <IonPage>
       <Navi />
-      <IonContent className="ion-padding">
+      <IonContent className="ion-padding background">
         <IonGrid>
           <IonRow>
             <IonCol sizeMd="1" sizeSm="0"/>
@@ -67,7 +67,7 @@ const Dogs = () => {
                     doggies.map((el, index) => {
                       return (
                         <IonCol key={index} sizeMd="2" sizeXs="12">
-                          <IonCard onClick={() => displayProfile(el)}>
+                          <IonCard class="background" onClick={() => displayProfile(el)}>
                             <ProfileImg id={el.id}/>
                             <IonCardHeader>
                               <IonCardSubtitle>{el.age} yrs - {el.breed}</IonCardSubtitle>

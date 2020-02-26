@@ -31,7 +31,7 @@ const AdminLogin = () => {
   function renderPage() {
     return (
     <IonPage>
-      <IonContent>
+      <IonContent class="background">
         <IonGrid>
           <IonRow>
             <IonCol sizeXs="12" offsetMd="2" sizeMd="8">
