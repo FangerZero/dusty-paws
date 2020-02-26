@@ -27,7 +27,7 @@ const About: React.FC = () => {
               <img src={April} alt="Dusty"/>
             </IonCol>
             <IonCol offsetLg="0" sizeLg="5" offsetXs="0" sizeXs="12">
-              <h1>April McDowell - Co-Founder</h1>
+              <h1>April McDowell - Adoption Coordinator/Foster</h1>
               <p>I have a great peryeneese named Snowy. </p>
             </IonCol>
           </IonRow>
