@@ -243,7 +243,7 @@ const AdminApplications = () => {
                     apps.map((app, index) => {
                       return(
                         <IonCol key={index} sizeMd="2" sizeXs="12">
-                          <IonCard onClick={() => displayApp(app)}>
+                          <IonCard class="background" onClick={() => displayApp(app)}>
                             <IonCardHeader>
                               <IonCardSubtitle>{app.city}, {app.state}</IonCardSubtitle>
                               <IonCardTitle>{app.lastName}, {app.firstName}</IonCardTitle>

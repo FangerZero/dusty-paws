@@ -284,7 +284,7 @@ const AdminDogs = () => {
                     doggies.map((el, index) => {
                       return (
                         <IonCol key={index} sizeMd="2" sizeXs="12">
-                          <IonCard onClick={() => displayProfile(el)}>
+                          <IonCard class="background" onClick={() => displayProfile(el)}>
                             <IonCardHeader>
                               <IonCardSubtitle>{el.age} yrs - {el.breed}</IonCardSubtitle>
                               <IonCardTitle>{el.name}</IonCardTitle>
@@ -301,7 +301,7 @@ const AdminDogs = () => {
                     <IonCol>No Dogs at this time</IonCol>
                   }
                   <IonCol sizeMd="2" sizeXs="12">
-                    <IonCard onClick={() => setShowNewDog(true)}>
+                    <IonCard class="background" onClick={() => setShowNewDog(true)}>
                       <IonCardHeader>
                         <IonCardTitle>Add a Dog</IonCardTitle>
                       </IonCardHeader>
