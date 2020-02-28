@@ -47,10 +47,10 @@ const DogImg = (props: any) => {
   }
   
   function clickedImg(img = '') {
-    if (imgLg !== '')
-      setImgLg('');
-    else 
+    if (img !== '' && imgLg !== img)
       setImgLg(img);
+    else
+      setImgLg('');
   }
   
   function displayImg() {
