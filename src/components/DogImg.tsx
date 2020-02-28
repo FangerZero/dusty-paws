@@ -47,12 +47,6 @@ const DogImg = (props: any) => {
   }
   
   function clickedImg(img = '') {
-    // Create large Img tag below all images
-    // When you click small img large img gets small image
-    // When you click same small image again, large image hides
-    // WHen you CLick large Img large image hides
-
-    
     if (imgLg !== '')
       setImgLg('');
     else 
