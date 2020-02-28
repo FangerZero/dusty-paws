@@ -163,6 +163,9 @@ const Adopt = (props: any) => {
                     </IonCardContent>
                   </IonCard>
                 </IonItem>
+                <IonItem lines="none">
+                  <a href="/resources/Application.pdf" download="Dusty Paws Application.pdf">Download Application</a>
+                </IonItem>
                 <IonItem>
                   Dusty Paws has a $15.00 non-refundable application fee.
                 </IonItem>
