@@ -1,4 +1,4 @@
-import { IonGrid, IonRow, IonCol, IonRouterLink, IonHeader } from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonRouterLink, IonHeader, IonText } from '@ionic/react';
 import React from 'react';
 
 const Navigation: React.FC = () => {
@@ -17,7 +17,7 @@ const Navigation: React.FC = () => {
                     <IonRouterLink href="/adopt">Adopt</IonRouterLink>
                 </IonCol>
                 <IonCol>
-                    <a href="https://www.paypal.me/dustypaws" target="_blank" rel="noopener noreferrer">Donate</a>
+                    <a href="https://www.paypal.me/dustypaws" target="_blank" rel="noopener noreferrer"><IonText color="primary">Donate</IonText></a>
                 </IonCol>
                 <IonCol>
                     <IonRouterLink href="/about">About</IonRouterLink>

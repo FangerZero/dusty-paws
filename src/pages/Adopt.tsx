@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonList, IonItem, IonButton, IonSelectOption, IonSelect, useIonViewDidEnter, IonCard, IonCardHeader, IonCardContent, IonCardTitle } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonRow, IonCol, IonList, IonItem, IonButton, IonSelectOption, IonSelect, useIonViewDidEnter, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonText } from '@ionic/react';
 import React, { useState } from 'react';
 import Navi from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -164,7 +164,7 @@ const Adopt = (props: any) => {
                   </IonCard>
                 </IonItem>
                 <IonItem lines="none">
-                  <a href="/resources/Application.pdf" download="Dusty Paws Application.pdf">Download Blank Application</a>
+                  <a href="/resources/Application.pdf" download="Dusty Paws Application.pdf"><IonText color="primary">Download Blank Application</IonText></a>
                 </IonItem>
                 <IonItem>
                   Dusty Paws has a $15.00 non-refundable application fee.
