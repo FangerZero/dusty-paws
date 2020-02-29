@@ -1,4 +1,4 @@
-import { IonItemGroup, IonItemDivider, IonLabel, IonItem, IonInput, IonIcon, IonSelect, IonSelectOption } from "@ionic/react";
+import { IonItemGroup, IonItemDivider, IonLabel, IonItem, IonTextarea, IonIcon, IonSelect, IonSelectOption } from "@ionic/react";
 import { addCircleOutline, removeCircleOutline } from 'ionicons/icons';
 import React, { useState } from "react";
 
@@ -29,37 +29,37 @@ const DogExperience = (props: any) => {
             </IonItemDivider>
             { show &&  
                 <IonItem lines="none">
-                    <IonLabel position="floating">How experienced are you?</IonLabel>
-                    <IonInput type="text" name="dogExperience" required onIonBlur={e => props.updateForm(e, 'dogExperience') }></IonInput>
+                    <IonLabel position="floating" class="ion-text-wrap">How experienced are you?</IonLabel>
+                    <IonTextarea name="dogExperience" required onIonBlur={e => props.updateForm(e, 'dogExperience') } rows={2}></IonTextarea>
                 </IonItem>
             }
             { show &&  
                 <IonItem lines="none">
-                    <IonLabel position="floating">How long will your dog be alone during the day?</IonLabel>
-                    <IonInput type="text" name="dogAloneTime" required onIonBlur={e => props.updateForm(e, 'dogAloneTime') }></IonInput>
+                    <IonLabel position="floating" class="ion-text-wrap">How long will your dog be alone during the day?</IonLabel>
+                    <IonTextarea name="dogAloneTime" required onIonBlur={e => props.updateForm(e, 'dogAloneTime') } rows={2}></IonTextarea>
                 </IonItem>
             }
             { show &&  
                 <IonItem lines="none">
-                    <IonLabel position="floating">Where will your dog be when you're not at home?</IonLabel>
-                    <IonInput type="text" name="dogAloneLocal" required onIonBlur={e => props.updateForm(e, 'dogAloneLocal') }></IonInput>
+                    <IonLabel position="floating" class="ion-text-wrap">Where will your dog be when you're not at home?</IonLabel>
+                    <IonTextarea name="dogAloneLocal" required onIonBlur={e => props.updateForm(e, 'dogAloneLocal') } rows={2}></IonTextarea>
                 </IonItem>
             }
             { show &&  
                 <IonItem lines="none">
-                    <IonLabel position="floating">When you're home, where will your dog be most of the time?</IonLabel>
-                    <IonInput type="text" name="dogHumanLocal" required onIonBlur={e => props.updateForm(e, 'dogHumanLocal') }></IonInput>
+                    <IonLabel position="floating" class="ion-text-wrap">When you're home, where will your dog be most of the time?</IonLabel>
+                    <IonTextarea name="dogHumanLocal" required onIonBlur={e => props.updateForm(e, 'dogHumanLocal') } rows={2}></IonTextarea>
                 </IonItem>
             }
             { show &&  
                 <IonItem lines="none">
-                    <IonLabel position="floating">When you go to sleep where will your dog sleep?</IonLabel>
-                    <IonInput type="text" name="dogSleepLocal" required onIonBlur={e => props.updateForm(e, 'dogSleepLocal') }></IonInput>
+                    <IonLabel position="floating" class="ion-text-wrap">When you go to sleep where will your dog sleep?</IonLabel>
+                    <IonTextarea name="dogSleepLocal" required onIonBlur={e => props.updateForm(e, 'dogSleepLocal') } rows={2}></IonTextarea>
                 </IonItem>
             }
             { show &&  
                 <IonItem lines="none">
-                        <IonLabel>Check which items you have yet to think about when adding a dog to your family...</IonLabel>
+                        <IonLabel class="ion-text-wrap">Check which items you have yet to think about when adding a dog to your family...</IonLabel>
                     <IonSelect multiple={true} name="dogUnprepared" cancelText="Cancel" okText="Done" onIonChange={e =>  props.updateForm(e, 'dogUnprepared') }> 
                     {dogUnprepared.map(el => 
                         <IonSelectOption  key={el.value} value={el.value}>{el.display}</IonSelectOption > 

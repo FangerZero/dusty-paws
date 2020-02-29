@@ -12,19 +12,19 @@ const FamilyInfo = (props: any) => {
             </IonItemDivider>
             { show &&
                 <IonItem lines="none">
-                    <IonLabel position="floating">Number of Adults and their age in household</IonLabel>
+                    <IonLabel position="floating" class="ion-text-wrap">Number of Adults and their age in household</IonLabel>
                     <IonTextarea name="adults" required onIonBlur={e => props.updateForm(e, 'adults') } rows={1} />
                 </IonItem>
             }
             { show &&  
                 <IonItem lines="none">
-                    <IonLabel position="floating">Number of Children and their age in household</IonLabel>
+                    <IonLabel position="floating" class="ion-text-wrap" >Number of Children and their age in household</IonLabel>
                     <IonTextarea name="children" required onIonBlur={e => props.updateForm(e, 'children') } rows={2} />
                 </IonItem>
             }
             { show &&  
                 <IonItem lines="none">
-                    <IonLabel position="floating">Number of pets, type, gender, intact, age, and how long they've lived with you</IonLabel>
+                    <IonLabel position="floating" class="ion-text-wrap">Number of pets, type, gender, intact, age, and how long they've lived with you</IonLabel>
                     <IonTextarea name="pets" required onIonBlur={e => props.updateForm(e, 'pets') } rows={3} />
                 </IonItem>
             }
