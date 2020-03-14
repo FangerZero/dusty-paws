@@ -70,7 +70,7 @@ const Dogs = () => {
                           <IonCard class="background" onClick={() => displayProfile(el)}>
                             <ProfileImg id={el.id}/>
                             <IonCardHeader>
-                              <IonCardSubtitle>{el.age} yrs - {el.breed}</IonCardSubtitle>
+                              <IonCardSubtitle>{el.age} - {el.breed}</IonCardSubtitle>
                               <IonCardTitle>{el.name}{el.adopted && <h3>&nbsp;Has been Adoppted!!!</h3>}</IonCardTitle>
                             </IonCardHeader>
                             {!el.adopted && 
